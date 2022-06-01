@@ -56,9 +56,9 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v2
       with:
         keep_history: true
-        target_branch: gh-pages
+        target_branch: master
         build_dir: ${{ env.PUBLISH_DIR }}
-        repo: young40/UnityITellYou.Src
+        repo: young40/young40.github.com
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
