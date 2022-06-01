@@ -40,6 +40,7 @@ jobs:
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
       with:
+        keep_history: true
         target_branch: gh-pages
         build_dir: ${{ env.PUBLISH_DIR }}
         repo: young40/UnityITellYou.Src
