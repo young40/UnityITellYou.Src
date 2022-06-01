@@ -1,0 +1,48 @@
+name: DeployToGitHubPages
+env:
+  PUBLISH_DIR: UnityITellYou/bin/Release/net6.0/publish/wwwroot
+
+# Controls when the action will run
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: '* */8 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    # 准备.NET环境
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Update Data From unity.com
+      run: |
+        dotnet run --project Tools/GetUnityDownloadInfos/
+        rm -rf UnityITellYou/wwwroot/download-data
+        cp -R Result/download-data UnityITellYou/wwwroot/download-data
+
+    - name: Publish app
+      run: dotnet publish -c Release
+
+    # - name: Rewrite base href
+    #   uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+    #   with:
+    #     html_path: ${{ env.PUBLISH_DIR }}/index.html
+    #     base_href: /BlazorOnGitHubPages/
+
+    - name: GitHub Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: ${{ env.PUBLISH_DIR }}
+        repo: young40/UnityITellYou.Src
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
