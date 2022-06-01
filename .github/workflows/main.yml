@@ -5,7 +5,7 @@ env:
 # Controls when the action will run
 on:
   push:
-    branches: [ master ]
+    branches: [ new-test ]
   schedule:
     - cron: '*/5 * * * *'
 
@@ -45,4 +45,4 @@ jobs:
         repo: young40/UnityITellYou.Src
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        GH_PAT: ${{ secrets.GITHUB_TOKEN }}
