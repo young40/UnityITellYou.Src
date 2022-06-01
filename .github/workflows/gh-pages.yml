@@ -42,7 +42,7 @@ jobs:
       with:
         target_branch: gh-pages
         build_dir: ${{ env.PUBLISH_DIR }}
-        repo: UnityITellYou/UnityITellYou.github.io
+        repo: young40/UnityITellYou.Src
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
