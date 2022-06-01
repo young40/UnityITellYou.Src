@@ -21,9 +21,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Random
-      run: |
-        date > UnityITellYou/bin/Release/net6.0/publish/wwwroot/date.txt
+    
         
     - name: Update Data From unity.com
       run: |
@@ -33,6 +31,10 @@ jobs:
 
     - name: Publish app
       run: dotnet publish -c Release
+      
+    - name: Random
+      run: |
+        date > UnityITellYou/bin/Release/net6.0/publish/wwwroot/date.txt
 
     # - name: Rewrite base href
     #   uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
