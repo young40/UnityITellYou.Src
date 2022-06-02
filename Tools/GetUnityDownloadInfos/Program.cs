@@ -38,11 +38,13 @@ namespace GetUnityDownloadInfos
             var address = "https://unity3d.com/get-unity/download/archive";
 
             var document = await context.OpenAsync(address);
+            var html = document.ToHtml();
 
             var archives= document.GetElementsByClassName("version archive");
             Console.WriteLine("archives 长度: " + archives.Length);
 
             var rootDir = Directory.GetCurrentDirectory();
+            File.WriteAllText(Path.Join(rootDir, "archive.html"), html);
             List<DownloadNavDto> DownloadNavDtoList = new List<DownloadNavDto>();
 
             foreach (var archive in archives)

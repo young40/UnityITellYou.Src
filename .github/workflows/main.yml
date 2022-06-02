@@ -28,6 +28,7 @@ jobs:
         dotnet run --project Tools/GetUnityDownloadInfos/
         rm -rf UnityITellYou/wwwroot/download-data
         cp -R Result/download-data UnityITellYou/wwwroot/download-data
+        cp archive.html UnityITellYou/wwwroot/
 
     - name: Publish app
       run: dotnet publish -c Release
